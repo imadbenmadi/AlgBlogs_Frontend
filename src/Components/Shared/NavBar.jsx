@@ -4,34 +4,47 @@ import { IoNotifications } from "react-icons/io5";
 
 export default function NavBar() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [data, setdata] = useState(null); // Change the initial state to null
-
+    const [data, setdata] = useState(null); 
     function Nav() {
         return (
-            <div className="bg-gray-800 text-white p-10 flex items-center">
-                <img
-                    src="http://localhost:3000/Logo.png"
-                    alt="Logo"
-                    className="w-10 h-10" // Adjusted width and added height for a square logo
-                />
-                {/* search bar */}
-                <div className="ml-4">
-                    <CiSearch className="text-white" />
-                    <input type="text" className="ml-2 p-2" />
+            <div className="bg-gray-800 text-white  flex items-center justify-between ">
+                <div className="flex justify-start items-center">
+                    <img
+                        src="http://localhost:3000/Logo2.png"
+                        alt="Logo"
+                        className="w-[100px]"
+                    />
+                    {/* search bar */}
+                    <div className=" flex items-center color p-1 white border-2 rounded  bg-transparent h-fit">
+                        <CiSearch className=" font-bold text-2xl cursor-pointer" />
+                        <input
+                            type="text"
+                            className=" bg-transparent  p-1 focus:outline-none focus:border-transparent"
+                        />
+                    </div>
                 </div>
-                <div className="ml-auto">
+
+                <div className="">
                     {isAuthenticated ? (
                         <div className="flex items-center">
-                            <div className="mr-4">Write a Blog</div>
+                            <div className=" border p-1 rounded mr-2  cursor-pointer">
+                                Write it
+                            </div>
                             <img
-                                src={data?.userName} // Update to use correct property name
+                                src={
+                                    data && data.Profile_Pic
+                                        ? data.Profile_Pic
+                                        : "http://localhost:5173/default_Logo.png"
+                                }
                                 alt="Profile pic"
-                                className="rounded-full max-w-20 h-20" // Adjusted width and added height for a square profile pic
+                                className="rounded-full w-10 "
                             />
-                            <IoNotifications className="ml-4" />
+                            <IoNotifications className="mx-1 text-xl" />
                         </div>
                     ) : (
-                        <div>Login</div>
+                        <div className="border p-2 rounded mr-2  cursor-pointer">
+                            Login
+                        </div>
                     )}
                 </div>
             </div>
