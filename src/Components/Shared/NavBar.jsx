@@ -4,7 +4,7 @@ import { IoNotifications } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
 
 export default function NavBar() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
     const [data, setdata] = useState(null); 
     function Nav() {
         return (
@@ -19,11 +19,14 @@ export default function NavBar() {
                         className="w-[100px]"
                     />
                     {/* search bar */}
-                    <div className="hidden md:flex items-center color p-1 white border-2 rounded  bg-transparent h-fit">
-                        <CiSearch className=" font-bold text-2xl cursor-pointer " />
+                    <div className="hidden md:flex items-center    border-2 rounded  bg-secondary-color  ">
                         <input
                             type="text"
-                            className=" bg-transparent  p-1 focus:outline-none focus:border-transparent"
+                            className=" w-[350px] p-1 focus:outline-none bg-secondary-color focus:border-transparent"
+                        />
+                        <CiSearch
+                            className="p-1
+                         bg-transparent font-bold text-4xl cursor-pointer hover:bg-primary-color"
                         />
                     </div>
                 </div>
@@ -35,7 +38,11 @@ export default function NavBar() {
                                 Create Blog
                             </div>
                             {/* Search on mobile */}
-                            <CiSearch className="md:hidden font-bold text-2xl cursor-pointer" />
+                            <CiSearch
+                                className="md:hidden font-bold text-4xl 
+                             bg-secondary-color mr-2
+                             p-1 rounded cursor-pointer "
+                            />
 
                             <IoNotifications className="mx-1 text-xl" />
                             <img
@@ -50,8 +57,12 @@ export default function NavBar() {
                         </div>
                     ) : (
                         <div className=" flex items-center gap-4">
-                            <CiSearch className="md:hidden font-bold text-2xl cursor-pointer" />
-                            <div className="border p-2 rounded mr-2  cursor-pointer">
+                            <CiSearch
+                                className="md:hidden font-bold text-4xl 
+                             bg-secondary-color
+                             p-1 rounded cursor-pointer"
+                            />
+                            <div className="border p-2 rounded mr-2  underline hover:bg-secondary-color cursor-pointer">
                                 Login
                             </div>
                         </div>
@@ -61,30 +72,30 @@ export default function NavBar() {
         );
     }
 
-    useEffect(() => {
-        const checkAuthStatus = async () => {
-            try {
-                const response = await fetch(
-                    "http://localhost:3000/authStatus"
-                );
+    // useEffect(() => {
+    //     const checkAuthStatus = async () => {
+    //         try {
+    //             const response = await fetch(
+    //                 "http://localhost:3000/authStatus"
+    //             );
 
-                if (response.ok) {
-                    const userData = await response.json();
-                    setIsAuthenticated(userData.isAuthenticated);
-                    setdata(userData);
-                } else {
-                    setIsAuthenticated(false);
-                    setdata(null);
-                }
-            } catch (error) {
-                console.error("Error checking authentication status:", error);
-                setIsAuthenticated(false);
-                setdata(null);
-            }
-        };
+    //             if (response.ok) {
+    //                 const userData = await response.json();
+    //                 setIsAuthenticated(userData.isAuthenticated);
+    //                 setdata(userData);
+    //             } else {
+    //                 setIsAuthenticated(false);
+    //                 setdata(null);
+    //             }
+    //         } catch (error) {
+    //             console.error("Error checking authentication status:", error);
+    //             setIsAuthenticated(false);
+    //             setdata(null);
+    //         }
+    //     };
 
-        checkAuthStatus();
-    }, []);
+    //     checkAuthStatus();
+    // }, []);
 
     return <>{<Nav />}</>; // Removed unnecessary curly braces
 }
