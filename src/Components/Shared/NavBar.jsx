@@ -4,7 +4,7 @@ import { IoNotifications } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
 
 export default function NavBar() {
-    const [isAuthenticated, setIsAuthenticated] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [data, setdata] = useState(null); 
     function Nav() {
         return (
@@ -58,30 +58,30 @@ export default function NavBar() {
         );
     }
 
-    // useEffect(() => {
-    //     const checkAuthStatus = async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 "http://localhost:3000/authStatus"
-    //             );
+    useEffect(() => {
+        const checkAuthStatus = async () => {
+            try {
+                const response = await fetch(
+                    "http://localhost:3000/authStatus"
+                );
 
-    //             if (response.ok) {
-    //                 const userData = await response.json();
-    //                 setIsAuthenticated(userData.isAuthenticated);
-    //                 setdata(userData);
-    //             } else {
-    //                 setIsAuthenticated(false);
-    //                 setdata(null);
-    //             }
-    //         } catch (error) {
-    //             console.error("Error checking authentication status:", error);
-    //             setIsAuthenticated(false);
-    //             setdata(null);
-    //         }
-    //     };
+                if (response.ok) {
+                    const userData = await response.json();
+                    setIsAuthenticated(userData.isAuthenticated);
+                    setdata(userData);
+                } else {
+                    setIsAuthenticated(false);
+                    setdata(null);
+                }
+            } catch (error) {
+                console.error("Error checking authentication status:", error);
+                setIsAuthenticated(false);
+                setdata(null);
+            }
+        };
 
-    //     checkAuthStatus();
-    // }, []);
+        checkAuthStatus();
+    }, []);
 
     return <>{<Nav />}</>; // Removed unnecessary curly braces
 }
