@@ -49,8 +49,11 @@ export default function NavBar() {
                             />
                         </div>
                     ) : (
-                        <div className="border p-2 rounded mr-2  cursor-pointer">
-                            Login
+                        <div className=" flex items-center gap-4">
+                            <CiSearch className="md:hidden font-bold text-2xl cursor-pointer" />
+                            <div className="border p-2 rounded mr-2  cursor-pointer">
+                                Login
+                            </div>
                         </div>
                     )}
                 </div>
