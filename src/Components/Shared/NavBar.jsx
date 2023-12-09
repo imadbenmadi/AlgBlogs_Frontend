@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoNotifications } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
-
+import { AuthContext } from "../../main";
 export default function NavBar() {
-    const [isAuthenticated, setIsAuthenticated] = useState(true);
-    const [data, setdata] = useState(null); 
+//   const Status = useContext(AuthContext);
+const { isAuthenticated, UserData, SetIsAuthenticated, SetUserData } =
+    useContext(AuthContext);
     function Nav() {
+        
         return (
             <div className=" bg-primary-color  text-white  flex items-center justify-between ">
                 <div className="flex items-center">
@@ -47,8 +49,8 @@ export default function NavBar() {
                             <IoNotifications className="mx-1 text-xl" />
                             <img
                                 src={
-                                    data && data.Profile_Pic
-                                        ? data.Profile_Pic
+                                    UserData && UserData.Profile_Pic
+                                        ? UserData.Profile_Pic
                                         : "http://localhost:5173/default_Logo.png"
                                 }
                                 alt="Profile pic"
@@ -72,30 +74,31 @@ export default function NavBar() {
         );
     }
 
-    // useEffect(() => {
-    //     const checkAuthStatus = async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 "http://localhost:3000/authStatus"
-    //             );
+    useEffect(() => {
+        const checkAuthStatus = async () => {
+            try {
+                const response = await fetch(
+                    "http://localhost:3000/authStatus"
+                );
 
-    //             if (response.ok) {
-    //                 const userData = await response.json();
-    //                 setIsAuthenticated(userData.isAuthenticated);
-    //                 setdata(userData);
-    //             } else {
-    //                 setIsAuthenticated(false);
-    //                 setdata(null);
-    //             }
-    //         } catch (error) {
-    //             console.error("Error checking authentication status:", error);
-    //             setIsAuthenticated(false);
-    //             setdata(null);
-    //         }
-    //     };
+                if (response.ok) {
+                    const userData = await response.json();
+                    SetIsAuthenticated(userData.isAuthenticated);
+                    SetUserData(userData);
+                } else {
+                    SetIsAuthenticated(false);
+                    SetUserData(null);
+                }
+            } catch (error) {
+                console.error("Error checking authentication status:", error);
+                SetIsAuthenticated(false);
+                SetUserData(null);
+            }
+        };
 
-    //     checkAuthStatus();
-    // }, []);
+        checkAuthStatus();
+    }, [SetIsAuthenticated, SetUserData]);
+
 
     return <>{<Nav />}</>; // Removed unnecessary curly braces
 }

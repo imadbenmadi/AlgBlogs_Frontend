@@ -1,10 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import React, { useState, createContext } from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-    ze
-  </React.StrictMode>,
-)
+export const AuthContext = createContext();
+
+const Main = () => {
+    const [isAuthenticated, SetIsAuthenticated] = useState(false);
+    const [UserData, SetUserData] = useState(null);
+
+    return (
+        <React.StrictMode>
+            <AuthContext.Provider
+                value={{
+                    isAuthenticated,
+                    UserData,
+                    SetIsAuthenticated,
+                    SetUserData,
+                }}
+            >
+                <App />
+            </AuthContext.Provider>
+        </React.StrictMode>
+    );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Main />);
