@@ -10,7 +10,7 @@ const { isAuthenticated, UserData, SetIsAuthenticated, SetUserData } =
     function Nav() {
         
         return (
-            <div className=" bg-primary-color  text-white  flex items-center justify-between ">
+            <div className=" bg-primary-color  text-white min-h-[65px] flex items-center justify-between ">
                 <div className="flex items-center">
                     <div className="md:hidden   border-2 rounded ml-2 cursor-pointer">
                         <IoMenu className=" text-3xl " />
@@ -21,13 +21,13 @@ const { isAuthenticated, UserData, SetIsAuthenticated, SetUserData } =
                         className="w-[100px]"
                     />
                     {/* search bar */}
-                    <div className="hidden md:flex items-center    border-2 rounded  bg-secondary-color  ">
+                    <div className="hidden md:flex items-center    border-2 border-[color:var(--white-gray)] rounded  bg-secondary-color  ">
                         <input
                             type="text"
                             className=" w-[350px] p-1 focus:outline-none bg-secondary-color focus:border-transparent"
                         />
                         <CiSearch
-                            className="p-1
+                            className="p-1 rounded
                          bg-transparent font-bold text-4xl cursor-pointer hover:bg-primary-color"
                         />
                     </div>
@@ -61,10 +61,10 @@ const { isAuthenticated, UserData, SetIsAuthenticated, SetUserData } =
                         <div className=" flex items-center gap-4">
                             <CiSearch
                                 className="md:hidden font-bold text-4xl 
-                             bg-secondary-color
+                             bg-secondary-color text--white-gray
                              p-1 rounded cursor-pointer"
                             />
-                            <div className="border p-2 rounded mr-2  underline hover:bg-secondary-color cursor-pointer">
+                            <div className="border p-2 rounded mr-2   hover:bg-secondary-color hover:underline cursor-pointer">
                                 Login
                             </div>
                         </div>
